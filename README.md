@@ -1,1 +1,2 @@
 # friendFinder
+This app will search a database to find a friend for you. Fill out the name and image url fields and answer all of the questions. When you are done, click submit. The name and image submitted by the most recent user who has answers most closely matching your own will be displayed. For an invalid image url or a valid url that is unable to access the image to which it links for any reason, an anonymous default user image will be shown in their place.

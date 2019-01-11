@@ -16,13 +16,12 @@
     <!-- Chosen -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
-
 </head>
 
 <body>
     <div class="container">
 
-        <h2>Survey Questions</h2>
+        <h2><b>Survey Questions</b></h2>
         <hr>
         <form method="POST" role="form"></form>
         <h3><strong>About You</strong></h3>
@@ -150,25 +149,27 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle"
-                aria-hidden="true"></i> Submit</button>
-        </form>
-
+                aria-hidden="true"></i>Submit</button>
         <div id="myModal" class="modal">
             <div class="modal-content">
-                <h3>Closest Match</h3>
+                <h3 id="modalTitle">Closest Match</h3>
                 <div class="divider"></div>
                 <p id="newFriend"></p>
-                <img id="img01" class="materialboxed" width="625" src="" alt="Unable to Load Image">
+                <img id="img01" class="materialboxed" src="" onerror="this.src='http://chittagongit.com//images/default-user-icon/default-user-icon-8.jpg'">
             </div>
             <div class="modal-footer">
                 <a href="/survey" class="modal-action modal-close btn-flat">Find More Friends</a>
             </div>
         </div>
+        </form>
+
+
 
         <hr>
         <footer class="footer">
             <div class="container">
-                <p><a href="/api/friends">API Friends List</a> | <a href="">GitHub Repo</a></p>
+                <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/Steven-D-Brown/friendFinder">GitHub
+                        Repo</a></p>
             </div>
         </footer>
     </div>
@@ -212,7 +213,12 @@
 
             $.post("/api/friends", user, function (data) {
                 $("#newFriend").html(data.name);
-                $("#img01").attr("src", data.photo);
+                if (data.photo.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                    console.log("image!");
+                    $("#img01").attr("src", "");
+                }
+                else
+                    $("#img01").attr("src", data.photo);
                 $("#myModal").modal("toggle");
 
                 $("#name").val("");
